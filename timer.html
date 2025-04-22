@@ -1,0 +1,286 @@
+<!-- timer.html -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>【禮贈品】質感智能計時器</title>
+    <style>
+        .navbar {
+            background-color: rgb(247, 247, 238);
+            padding: 0 20px;
+            }
+
+            .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100px;
+            position: relative;
+            }
+
+            /* 漢堡按鈕 */
+            .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            }
+
+            .menu-toggle span {
+            height: 4px;
+            background-color: #5D3A00;
+            margin: 4px 0;
+            border-radius: 2px;
+            }
+
+            .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            }
+
+            .nav-item {
+            position: relative;
+            }
+
+            .nav-links a,
+            .dropdown-btn {
+            text-decoration: none;
+            color: white;
+            background-color: #3e2404;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: color 0.3s;
+            display: inline-block;
+            white-space: nowrap;
+            }
+
+            .nav-links a:hover,
+            .dropdown-btn:hover {
+            color: #edbf88;
+            }
+
+            /* 下拉選單 */
+            .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background-color: rgb(247, 247, 238);
+            min-width: 200px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            z-index: 1;
+            padding: 10px 0;
+            }
+
+            .dropdown-content a {
+            display: block;
+            color: white;
+            background-color: #2b1903;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin: 5px 10px;
+            }
+
+            .dropdown-content a:hover {
+            color: #D2B48C;
+            }
+
+            .nav-item:hover .dropdown-content {
+            display: block;
+            }
+
+            /* 手機版樣式 */
+            @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 10px;
+                position: absolute;
+                top: 200px;
+                left: 0;
+                width: 100%;
+                background-color: beige;
+                padding: 20px;
+            }
+
+            .nav-item:hover .dropdown-content {
+                position: relative;
+                top: auto;
+                left: auto;
+                box-shadow: none;
+            }
+
+            #menu-toggle:checked + .nav-links {
+                display: flex;
+            }
+            }
+
+            /* 藏起 checkbox */
+            #menu-toggle {
+            display: none;
+            }
+        h1 {
+            text-align: center;     /* 文字置中 */
+            font-family: "微軟正黑體", Arial, sans-serif;  /* 字體 */
+            font-size: 38px;        /* 字體大小 */
+            color: #333333;         /* 文字顏色 */
+            margin-top: 48px;           }
+        h2 {
+            text-align: left;    
+            font-family: "微軟正黑體", Arial, sans-serif;  
+            font-size: 32px;
+            margin-left: 160px; 
+            margin-right: 160px;      
+            color: #323232;         }
+        h3 {
+            text-align: left;    
+            font-family: "微軟正黑體", Arial, sans-serif;  
+            font-size: 18px;     
+            font-weight: bold;
+            color: #333333;
+            margin-left: 160px;
+            margin-right: 160px;
+            margin-bottom: 8px;       }
+        h4 {
+            text-align: right;    
+            font-family: "微軟正黑體", Arial, sans-serif;
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: 173px;
+            margin-right: 160px;
+            font-size: 16px;       }
+        p {
+            text-align: left;   
+            font-family: "圓體", Arial, sans-serif;
+            margin-top: 0;
+            margin-left: 173px;
+            margin-right: 160px;
+            font-size: 16px;
+        }
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        hr {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #77757b;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left: 160px;
+            margin-right: 10px;
+            margin-bottom: 8px;
+            margin-top: 8px;
+        }
+        .btn2 {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #1877F2;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left: 0px;
+            margin-right: 160px;
+            margin-bottom: 8px;
+            margin-top: 8px;
+        }
+        .btn_book {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #3e2404;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left: 855px;
+            margin-right: 100px;
+            margin-bottom: 8px;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-container">
+              
+          <!-- 漢堡選單 checkbox -->
+          <label for="menu-toggle" class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </label>
+          <input type="checkbox" id="menu-toggle">
+    
+          <!-- 導覽連結 -->
+          <div class="nav-links">
+            <a href="#檔案名稱">公司介紹</a>
+            <div class="nav-item">
+                <a href="#" class="dropdown-btn">禮品總覽</a>
+              <div class="dropdown-content">
+                <a href="#timer">質感智能計時器</a>
+                <a href="#stand">直播架</a>
+                <a href="#car">車用無線充電架</a>
+              </div>
+            </div>
+            <a href="#檔案名稱">禮品規劃</a>
+            <a href="#檔案名稱">採購流程</a>
+            <a href="#檔案名稱">聯絡我們</a>
+          </div>
+        </div>
+      </div>
+                <img src="質感智能計時器 _網頁slogan.banner圖_淺灰.jpg" alt="網頁banner" width:100% height="500">
+                <br> 
+                <h4>單價區間:NT 350 ~ 550</h4>
+                <h4>建議客製量:100個以上</h4>
+                <a href="#檔案名稱" class="btn_book">訂購</a>
+        <hr>
+        <h1>產品特色</h1>
+                <img src="質感智能計時器 _多功能、外觀.jpg" alt="質感智能計時器 _多功能、外觀" 160px; width="700" height="700">
+                <br>
+                <img src="質感智能計時器_使用場景_繁體.jpg" alt="質感智能計時器_使用場景_繁體" width="600" height="904">
+                <br>
+                <img src="質感智能計時器_功能示意圖_操作方便_繁體.jpg" alt="質感智能計時器_功能示意圖_操作方便_繁體" width="600" height="911">
+                <br>
+                <img src="質感智能計時器_功能示意圖_支架功能.jpg" alt="質感智能計時器_功能示意圖_支架功能" width="600" height="911">
+                <br>
+                <img src="質感智能計時器 _logo印製位置說明.jpg" alt="質感智能計時器 _logo印製位置說明" width="600" height="911">
+                <br>
+                <img src="質感智能計時器_產品尺寸_繁體.jpg" alt="質感智能計時器_產品尺寸_繁體" width="813.95" height="700">
+                <br>
+                <img src="質感智能計時器_產品規格清單_繁體.jpg" alt="質感智能計時器_產品規格清單_繁體" width="675.24" height="700">
+                <br>
+        <hr>
+        <h2>顛覆傳統計時器的禮贈品 展現品牌新穎形象</h2>
+            <h3>• 時尚科技的設計，打造獨特品牌形象：</h3>
+                <p>這款圓形計時器突破傳統設計，以簡約時尚的科技感外觀，在禮贈品市場中脫穎而出。<br>獨特設計能為收禮者留下深刻印象，有效提升贈禮單位的品牌形象，並展現贈禮者的科技品味。</p>
+            <h3>• 高性價比的贈禮選擇：</h3>
+                <p>相較於功能複雜的智能計時器、智能手環或電子手錶，本產品價格更具競爭力，又同時保有時尚科技的外觀設計。其簡約實用的功能，使其成為高性價比的禮贈品選擇。</p>
+            <h3>• 高度客製化，滿足多元需求：</h3>
+                <p>針對禮贈品市場重視客製化的特性，本產品有多個位置適合呈現品牌標誌，包括圓形計時器的側面、正面圓形時間文字的上側與背面電池蓋等多個空白區域，滿足客戶打造專屬禮贈品的客製化需求。<br>本產品適用的印製方式含有：數位印刷、網版印刷與雷射雕刻。</p>
+        <h2>多功能貼心設計</h2>
+            <h3>• 時尚設計與清晰顯示：</h3>
+                <p>簡約的圓形輪廓與清晰的LED螢幕，大字體設計讓遠距離也能輕鬆讀取時間，在運動或廚房等需要快速查看時間的場景中非常實用。</p>
+            <h3>• 便捷的操作體驗：</h3>
+                <p>操作簡單方便，旋轉扭動計時器即可設定時間，讓使用者能夠快速準確地設定所需時間。</p>
+            <h3>• 實用性高：</h3>
+                <p>磁吸和支架的設計，讓產品可以吸附在金屬表面，或者放置在桌面上，增加使用的靈活度。</p>
+            <h3>• 省電續航：</h3>
+                <p>自動調暗和關閉螢幕的省電設計，有效延長電池續航力。<br>電池續航力長，減少了頻繁更換電池的麻煩。</p>
+             <a href="https://www.oyeatek.com/" class="btn">台灣歐耶科技網站</a><a href="https://www.bing.com/ck/a?!&&p=c1209ddc93b994bfc12af4499bb4ca944b6ff3ac56d9e3fe02f8e26b05bb8f51JmltdHM9MTc0NDMyOTYwMA&ptn=3&ver=2&hsh=4&fclid=10040f1d-3be9-6893-1247-1a7a3af969a1&psq=%e6%ad%90%e8%80%b6%e7%a7%91%e6%8a%80+facebook&u=a1aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3AvJUU1JThGJUIwJUU3JTgxJUEzJUU2JUFEJTkwJUU4JTgwJUI2JUU3JUE3JTkxJUU2JThBJTgwJUU4JTgyJUExJUU0JUJCJUJEJUU2JTlDJTg5JUU5JTk5JTkwJUU1JTg1JUFDJUU1JThGJUI4T2gtWWVhaC1UZWNobm9sb2d5LUNvTHRkLTEwMDA1NDIxNDUyMjQ2Ny8&ntb=1" class="btn2">FB 台灣歐耶科技</a>
+            <p></p>
+            <img src="質感智能計時器 _網頁底圖_幾何圖形.jpg" alt="網頁底圖"  width=100% height="300">
+</body>
+</html>
